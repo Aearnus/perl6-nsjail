@@ -1,0 +1,15 @@
+{
+    "perl"          : "6.*",
+    "name"          : "NSJail",
+    "version"       : "0.0.1",
+    "description"   : "Bindings to NSJail",
+    "tags"          : [ "Unix" ],
+    "authors"       : [ "Tyler" ],
+    "license"       : "Artistic-2.0",
+    "source-url"   : "https://github.com/aearnus/perl6-nsjail.git",
+    "depends"       : [ "Test::META" ],
+    "provides"      : {
+        "NSJail": "lib/NSJail.p6"
+    },
+    "resources": [ "nsjail-cli" ]
+}
