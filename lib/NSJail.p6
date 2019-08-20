@@ -14,6 +14,7 @@ class NSJail {
         }
         self
     }
+    method config($v where *.IO.f) { @!args.push: "-C $v"; self }
     method chroot($v where *.IO.d) { @!args.push: "-c $v"; self }
     method rw { @!args.push: '--rw'; self }
     method user(Str $v) { @!args.push: "-u $v"; self }
@@ -69,6 +70,41 @@ class NSJail {
     method disable-clone-newipc { @!args.push: '--disable_clone_newipc'; self }
     method disable-clone-newuts { @!args.push: '--disable_clone_newuts'; self }
     method disable-clone-newcgroup { @!args.push: '--disable_clone_newcgroup'; self }
+    method uid-mapping(Str $v) { @!args.push: "-U $v"; self }
+    method gid-mapping(Str $v) { @!args.push: "-G $v"; self }
+    method bindmount-ro(Str $v) { @!args.push: "-R $v"; self }
+    method bindmount(Str $v) { @!args.push: "-B $v"; self }
+    method tempfsmount(Str $v) { @!args.push: "-T $v"; self }
+    method mount(Str $v) { @!args.push: "-m $v"; self }
+    method symlink(Str $v) { @!args.push: "-s $v"; self }
+    method disable-proc { @!args.push: '--disable_proc'; self }
+    method proc-path(Str $v where *.IO.d) { @!args.push: "-s $v"; self }
+    method proc-rw { @!args.push: '--proc_rw'; self }
+    method seccomp-policy(Str $v) { @!args.push: "-P $v"; self }
+    method seccomp-string(Str $v) { @!args.push: "--seccomp_string $v"; self }
+    method seccomp-log { @!args.push: '--seccomp_log'; self }
+    method nice-level(Int $v where -20 <= * <= 19) { @!args.push: "--nice_level $v"; self }
+    method cgroup-mem-max(Int $v where * >= 0) { @!args.push: "--cgroup_mem_max $v"; self }
+    method cgroup-mem-mount($v where *.IO.f) { @!args.push: "--cgroup_mem_mount $v"; self }
+    method cgroup-mem-parent(Str $v) { @!args.push: "--cgroup_mem_parent $v"; self }
+    method cgroup-pids-max(Int $v where * >= 0) { @!args.push: "--cgroup_pids_max $v"; self }
+    method cgroup-pids-mount($v where *.IO.f) { @!args.push: "--cgroup_pids_mount $v"; self }
+    method cgroup-pids-parent(Str $v) { @!args.push: "--cgroup_pids_parent $v"; self }
+    method cgroup-net-cls-classid(Int $v where * >= 0) { @!args.push: "--cgroup_net_cls_classid $v"; self }
+    method cgroup-net-cls-mount($v where *.IO.f) { @!args.push: "--cgroup_net_cls_mount $v"; self }
+    method cgroup-net-cls-parent(Str $v) { @!args.push: "--cgroup_net_cls_parent $v"; self }
+    method cgroup-cpu-ms-per-sec(Int $v where * >= 0) { @!args.push: "--cgroup_cpu_ms_per_sec $v"; self }
+    method cgroup-cpu-mount($v where *.IO.f) { @!args.push: "--cgroup_cpu_mount $v"; self }
+    method cgroup-cpu-parent(Str $v) { @!args.push: "--cgroup_cpu_parent $v"; self }
+    method cgroupv2-mount($v where *.IO.f) { @!args.push: "--cgroupv2_mount $v"; self }
+    method use-cgroupv2 { @!args.push: '--use_cgroupv2'; self }
+    method iface-no-lo { @!args.push: '--iface_no_lo'; self }
+    method iface-own(Str $v) { @!args.push: "--iface_own $v"; self }
+    method macvlan-iface(Str $v) { @!args.push: "--macvlan_iface $v"; self }
+    method macvlan-vs-ip(Str $v) { @!args.push: "--macvlan_vs_ip $v"; self }
+    method macvlan-vs-nm(Str $v) { @!args.push: "--macvlan_vs_nm $v"; self }
+    method macvlan-vs-gw(Str $v) { @!args.push: "--macvlan_vs_gw $v"; self }
+    method macvlan-vs-ma(Str $v) { @!args.push: "--macvlan_vs_ma $v"; self }
 
     # Execution methods
     method run(Str $file-path where *.IO.f, Str *@args) { 
