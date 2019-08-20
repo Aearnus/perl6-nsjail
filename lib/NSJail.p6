@@ -1,6 +1,6 @@
 unit module NSJail;
 
-class NSJail {
+class NSJail is export {
     has Str $!cmd = %?RESOURCES<nsjail-cli>.path;
     has Str @!args;
 
@@ -108,10 +108,6 @@ class NSJail {
 
     # Execution methods
     method run(Str $file-path where *.IO.f, *@args) { 
-        qqx( { @!cmd } { @!args } -- $file-path { @args } ) 
-    }
-
-    method run-async(Str $file-path where *.IO.f, *@args) { 
-        qqx( { @! } -- $file-path ) 
+        qqx[ { $!cmd } { @!args } -- $file-path { @args } ]
     }
 }
