@@ -26,8 +26,8 @@ class NSJail {
     method max-conn(Int $v) { @!args.push: "-i $v"; self }
     method log-file(IO::Path(Str) $v) { @!args.push: "-l $v"; self }
     multi method log-fd(Int $v) { @!args.push: "-L $v"; self }
-    multi method log-fd(Str "stdout") { @!args.push: "-L 1"; self }
-    multi method log-fd(Str "stderr") { @!args.push: "-L 2"; self }
+    multi method log-fd("stdout") { @!args.push: "-L 1"; self }
+    multi method log-fd("stderr") { @!args.push: "-L 2"; self }
     method time-limit(Int $v) { @!args.push: "-t $v"; self }
     method max-cpus(Int $v) { @!args.push: "--max_cpus $v"; self }
     method daemonize { @!args.push: '-d'; self }
@@ -61,7 +61,7 @@ class NSJail {
     method persona-addr-compat-layout { @!args.push: '--persona_addr_compat_layout'; self }
     method persona-mmap-page-zero { @!args.push: '--persona_mmap_page_zero'; self }
     method persona-read-implies-exec { @!args.push: '--persona_read_implies_exec'; self }
-    method persona-addr-limit-3gb { @!args.push: '--persona_addr_limit_3gb'; self }
+    method persona-addr-limit-threegb { @!args.push: '--persona_addr_limit_3gb'; self }
     method persona-addr-no-randomize { @!args.push: '--persona_addr_no_randomize'; self }
     method disable-clone-newnet { @!args.push: '--disable_clone_newnet'; self }
     method disable-clone-newuser { @!args.push: '--disable_clone_newuser'; self }
@@ -107,11 +107,11 @@ class NSJail {
     method macvlan-vs-ma(Str $v) { @!args.push: "--macvlan_vs_ma $v"; self }
 
     # Execution methods
-    method run(Str $file-path where *.IO.f, Str *@args) { 
+    method run(Str $file-path where *.IO.f, *@args) { 
         qqx( { @!cmd } { @!args } -- $file-path { @args } ) 
     }
 
-    method run-async(Str $file-path where *.IO.f, Str *@args) { 
+    method run-async(Str $file-path where *.IO.f, *@args) { 
         qqx( { @! } -- $file-path ) 
     }
 }
